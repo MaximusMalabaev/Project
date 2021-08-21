@@ -19,10 +19,10 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     save_as = True # пролистать 
     save_on_top = True
-    list_display = ('id', 'title', 'slug', 'category', 'created_at', 'get_photo') # Отображение в панели (фото, дата создания и т.д.)
+    list_display = ('id', 'title', 'slug', 'category', 'created_at', 'get_photo', 'views') # Отображение в панели (фото, дата создания и т.д.)
     list_display_links = ('id', 'title') # 
     search_fields = ('title',)  # Поиск в данном случае по названию постов
-    list_filter = ('category',) # Фильт постов, нужных категорий
+    list_filter = ('category', 'tags') # Фильт постов, нужных категорий, теги
     readonly_fields = ('views', 'created_at', 'get_photo') # Кол-во просмотров Поля для чтения кол-во просмотров
     fields = ('title', 'slug', 'category', 'tags', 'content', 'photo', 'get_photo', 'views', 'created_at') # Какие поля показывать
 

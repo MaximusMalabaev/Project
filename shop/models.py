@@ -17,8 +17,8 @@ title, slug, author, content, created_at, photo, views, category, tags
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
+    title = models.CharField(max_length=255, null=True)
+    slug = models.SlugField(max_length=255, verbose_name='Url', unique=True, null=True)
 
     def __str__(self):
         return self.title
@@ -33,8 +33,8 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
-    title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, verbose_name='Url', unique=True)
+    title = models.CharField(max_length=50, null=True)
+    slug = models.SlugField(max_length=50, verbose_name='Url', unique=True, null=True)
 
     def __str__(self):
         return self.title
@@ -49,14 +49,14 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
-    author = models.CharField(max_length=100)
-    content = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-    views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
+    title = models.CharField(max_length=255,null=True)
+    slug = models.SlugField(max_length=255, verbose_name='Url', unique=True, null=True)
+    author = models.CharField(max_length=100, null=True)
+    content = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Опубликовано', null=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True, null=True)
+    views = models.IntegerField(default=0, verbose_name='Кол-во просмотров', null=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts', null=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
 
     def __str__(self):
